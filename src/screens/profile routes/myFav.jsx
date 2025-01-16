@@ -4,7 +4,8 @@ import { CiHeart } from 'react-icons/ci'; // Ensure correct icon import
 
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import Footer from '../../components/Footer';
+import Footer from '../../components/footer';
+
 
 dayjs.extend(relativeTime);
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Timestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
+import Footer from "../../components/footer";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);

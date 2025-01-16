@@ -6,7 +6,8 @@ import Navbar from '../../components/Navbar';
 import { CiHeart } from 'react-icons/ci';
 import dayjs from 'dayjs';  // Importing dayjs to handle relative time
 import relativeTime from 'dayjs/plugin/relativeTime';
-import Footer from '../../components/Footer';
+import Footer from '../../components/footer';
+
 
 
 dayjs.extend(relativeTime); 
