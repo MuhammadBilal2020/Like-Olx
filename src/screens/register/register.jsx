@@ -2,8 +2,12 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { auth } from '../../config/firebaseconfig';
-import { collection, addDoc ,serverTimestamp  } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
+import { collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
 import { db } from "../../config/firebaseconfig";
+
+import { FaUpload } from "react-icons/fa";
+import handleImageUpload from '../../utils/cloudinaryUploader';
+
 
 
 
@@ -12,44 +16,79 @@ function Register() {
   let username = useRef('')
   let email = useRef('')
   let password = useRef('')
+  let confirmPass = useRef('')
+  
+    const [uploadedImages, setUploadedImages] = useState([]);
+    const [uploading, setUploading] = useState(false);
 
 
 
 
+
+    const handleUpload = async (e) => {
+      const files = e.target.files;
+      if (!files.length) return;
+    
+    
+      setUploading(true);
+    
+      const uploadPreset = "olx_clone_profile_image"; // Replace with your preset
+      const cloudName = "dpdxrs2pg"; // Replace with your cloud name
+    
+      const url = await handleImageUpload(files, uploadPreset, cloudName);
+      setUploadedImages(url);
+    
+      setUploading(false);
+    };
   // register user  and store data in firestore
   // Ensure this is imported
 
-let registerUser = async (event) => {
-  event.preventDefault();
+  let registerUser = async (event) => {
+    event.preventDefault();
 
-  try {
-    // Register user
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email.current.value,
-      password.current.value
-    );
-    const user = userCredential.user;
-    console.log(userCredential);
-    
+    if (password.current.value !== confirmPass.current.value) {
+      console.error("Passwords do not match");
+      return;
+    }
 
-    // Save user data to Firestore
-    const docRef = await addDoc(collection(db, "users"), {
-      email: email.current.value,
-      username: username.current.value,
-      password: password.current.value,
-      uid: user.uid, // Use user.uid directly here
-      createdAt: serverTimestamp(), // Add the timestamp here
-    });
+    try {
+      // Register user
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      );
+      const user = userCredential.user;
+      console.log(userCredential);
 
-  console.log(docRef);
-  
 
-    console.log("Document written with ID: ", docRef.id);
-  } catch (error) {
-    console.error("Error: ", error.code, error.message);
-  }
-};
+      // Save user data to Firestore
+      const docRef = await addDoc(collection(db, "users"), {
+        email: email.current.value,
+        username: username.current.value,
+        password: password.current.value,
+        uid: user.uid, // Use user.uid directly here
+        createdAt: serverTimestamp(), // Add the timestamp here
+        profileImage : uploadedImages
+
+
+      });
+      
+
+      
+      console.log(docRef);
+
+
+      console.log("Document written with ID: ", docRef.id);
+      username.current.value = ""
+      password.current.value = ""
+      email.current.value = ""
+      confirmPass.current.value = ""
+
+    } catch (error) {
+      console.error("Error: ", error.code, error.message);
+    }
+  };
 
   
 
@@ -107,7 +146,7 @@ let registerUser = async (event) => {
               id="password"
               ref={password}
 
-              type="password"
+              type="text"
               placeholder="Enter your password"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
@@ -123,10 +162,32 @@ let registerUser = async (event) => {
             </label>
             <input
               id="confirmPassword"
-              type="password"
+              type="text"
               placeholder="Re-enter your password"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              ref={confirmPass}
             />
+
+            <div className="files justify-center flex gap-4 mt-4">
+                      <input
+                        type="file"
+                        multiple
+                        accept="image/*"
+                        onChange={handleUpload}
+                        className="hidden"
+                        id="fileUpload"
+                      />
+                      <label
+                        htmlFor="fileUpload"
+                        className="cursor-pointer flex gap-x-2 justify-center w-full p-3 border border-dashed border-gray-300 rounded-md text-center"
+                      >
+                        <div className="w-[2rem]">
+                          
+                        <FaUpload className="block   text-blue-500 text-xl" />
+                        </div>
+                        {uploading ? "Uploading..." : "Select Profile Image"}
+                      </label>
+                    </div>
           </div>
 
           {/* Submit Button */}

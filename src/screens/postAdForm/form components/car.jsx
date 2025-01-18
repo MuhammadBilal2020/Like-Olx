@@ -95,6 +95,7 @@ const CarForm = ({ onSubmit, cateName, username, uid }) => {
           </label>
         </div>
 
+
         {/* Display Uploaded Images */}
         <div className="uploaded-images mt-4 grid grid-cols-3 gap-4">
           {uploadedImages.map((url, index) => (

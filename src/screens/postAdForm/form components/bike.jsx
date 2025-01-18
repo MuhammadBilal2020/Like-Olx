@@ -89,22 +89,25 @@ console.log("navigate");
         {/* files  */}
 
         <div className="files justify-center flex gap-4 mt-4">
-          <input
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={handleUpload}
-            className="hidden"
-            id="fileUpload"
-          />
-          <label
-            htmlFor="fileUpload"
-            className="cursor-pointer w-full p-3 border border-dashed border-gray-300 rounded-md text-center"
-          >
-            <FaUpload className="text-blue-500 text-xl" />
-            {uploading ? "Uploading..." : "Upload Images"}
-          </label>
-        </div>
+                  <input
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    onChange={handleUpload}
+                    className="hidden"
+                    id="fileUpload"
+                  />
+                  <label
+                    htmlFor="fileUpload"
+                    className="cursor-pointer flex gap-x-2 justify-center w-full p-3 border border-dashed border-gray-300 rounded-md text-center"
+                  >
+                    <div className="w-[2rem]">
+                      
+                    <FaUpload className="block   text-blue-500 text-xl" />
+                    </div>
+                    {uploading ? "Uploading..." : "Upload Images"}
+                  </label>
+                </div>
 
 
         <div className="uploaded-images mt-4 grid grid-cols-3 gap-4">

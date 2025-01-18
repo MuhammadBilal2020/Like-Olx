@@ -18,8 +18,8 @@ const ProductDetail = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const goToProfile = () => {
-    navigate("/profile");
+  const goToProfile = (uid) => {
+    navigate(`/postprofile/${uid}`);
   };
 
   const goToChat = (uid) => {
@@ -154,7 +154,7 @@ const ProductDetail = () => {
                   <h4>{item.username || "Anonymous"}</h4>
                   <p>Member Since Feb 2024</p>
                   <h4
-                    onClick={goToProfile}
+                    onClick={() => goToProfile(item.uid)}
                     className="hover:text-blue-600 cursor-pointer"
                   >
                     See Profile...

@@ -17,6 +17,7 @@ import Profile from './screens/profile routes/Profile.jsx'
 import MyFav from './screens/profile routes/myFav.jsx'
 import Setting from './screens/profile routes/setting.jsx'
 import ProductDetail from './screens/product/productDetail.jsx'
+import PostProfile from './screens/profile routes/postProfile.jsx'
 // import Chat from './screens/chats/Chat.jsx'
 // import SingleUserChat from './screens/chats/SingleUserChat.jsx'
 
@@ -30,6 +31,11 @@ const router = createBrowserRouter([
     {
         path : "/productDetail/:id",
         element : <ProductDetail/>
+        
+    },
+    {
+        path : "/postprofile/:postUid",
+        element : <PostProfile/>
         
     },
 

@@ -42,6 +42,8 @@ const Myads = () => {
     setActiveDropdown((prev) => (prev === index ? null : index)); // Toggle dropdown for specific ad
   };
 
+
+
   const deActivate = async (adId) => {
     try {
       console.log(adId);
@@ -74,8 +76,6 @@ const Myads = () => {
     }
   };
 
- 
- 
   let delAd = async function (adId){
     //  console.log(postData);
     
@@ -113,18 +113,21 @@ setPostData([...remainData])
         </div>
 
         {/* Filter Buttons */}
-        <div className='flex justify-between mt-5 w-[30rem]'>
-          {['All', 'Active', 'Inactive'].map((currentFilter, index) => (
-            <button
-              key={index}
-              className='border-[1.6px] w-[9rem] px-[.3rem] py-[.3rem] rounded-full'
-              onClick={() => setFilter(currentFilter)} // Set the filter based on button click
-            >
-              <span className='text-[.9rem]'>{currentFilter} Ads</span>
-              <span>({postData.filter(ad => currentFilter === 'All' || ad.status === currentFilter).length})</span>
-            </button>
-          ))}
-        </div>
+        {/* Filter Buttons */}
+<div className='flex justify-between mt-5 w-[30rem]'>
+  {['All', 'Active', 'Inactive'].map((currentFilter, index) => (
+    <button
+      key={index}
+      className={`border-[1.6px] w-[9rem] px-[.3rem] py-[.3rem] rounded-full 
+                  ${filter === currentFilter ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+      onClick={() => setFilter(currentFilter)} // Set the filter based on button click
+    >
+      <span className='text-[.9rem]'>{currentFilter} Ads</span>
+      <span>({postData.filter(ad => currentFilter === 'All' || ad.status === currentFilter).length})</span>
+    </button>
+  ))}
+</div>
+
 
         {/* Ads */}
         {filteredPosts.length > 0 ? (
