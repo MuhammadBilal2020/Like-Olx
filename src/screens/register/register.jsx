@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebase
 import { auth } from '../../config/firebaseconfig';
 import { collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
 import { db } from "../../config/firebaseconfig";
+import Swal from 'sweetalert2';
 
 import { FaUpload } from "react-icons/fa";
 import handleImageUpload from '../../utils/cloudinaryUploader';
@@ -60,6 +61,14 @@ function Register() {
       );
       const user = userCredential.user;
       console.log(userCredential);
+
+      Swal.fire({
+        title: "Registeration Success!",
+        text: "You are register",
+        icon: "success"
+      });
+      
+
 
 
       // Save user data to Firestore

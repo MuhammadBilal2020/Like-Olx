@@ -4,6 +4,7 @@ import Footer from '../../components/footer'
 import { collection, query, where, getDocs, updateDoc, doc } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
 import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
 import { auth, db } from '../../config/firebaseconfig';
+import Swal from 'sweetalert2';
 
 
 const Setting = () => {
@@ -56,19 +57,25 @@ let [u , setu] = useState('')
           await updateDoc(userPasswordDoc, {
             password: newPass,
           });
-          console.log("Password updated successfully");
+          
+          Swal.fire({
+            title: "Updation",
+            text: "Password Updated Successfilly",
+            icon: "success"
+          });
+       
           oldPassRef.current.value = ""
           newPassRef.current.value = ""
           conformNewPassRef.current.value = ""
 
         } catch (error) {
-          console.error("Error updating password:", error);
+         alert("Error updating password:", error);
         }
       } else {
-        console.log("New password and confirmation do not match");
+        alert("New password and confirmation do not match");
       }
     } else {
-      console.log("Old password is incorrect");
+      alert("Old password is incorrect");
     }
   };
   

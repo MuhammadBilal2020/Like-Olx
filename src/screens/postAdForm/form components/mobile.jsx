@@ -3,6 +3,7 @@ import { FaUpload } from "react-icons/fa";
 import { serverTimestamp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
 import handleImageUpload from "../../../utils/cloudinaryUploader";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const MobileForm = ({ onSubmit, cateName, username, uid }) => {
@@ -50,6 +51,14 @@ const MobileForm = ({ onSubmit, cateName, username, uid }) => {
         };
         onSubmit(mobileData);
 
+        Swal.fire({
+            title: "Done",
+            text: "Your ad has been posted successfully.",
+            icon: "success"
+          });
+          
+          navigate("/")
+
         priceRef.current.value =""
     locationRef.current.value =""
     descriptionRef.current.value =""
@@ -58,7 +67,8 @@ const MobileForm = ({ onSubmit, cateName, username, uid }) => {
     };
 
     let navToMain = function (){
-        navigate("/")
+        console.log(naviaget);
+        
     }
 
     return (

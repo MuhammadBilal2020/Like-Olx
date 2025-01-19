@@ -3,6 +3,7 @@ import { FaUpload } from "react-icons/fa";
 import { serverTimestamp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
 import handleImageUpload from "../../../utils/cloudinaryUploader";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const BikeForm = ({ onSubmit, cateName, username, uid }) => {
@@ -65,6 +66,14 @@ const handleUpload = async (e) => {
       status : "Active"
     };
     onSubmit(bikeData);
+    
+    Swal.fire({
+      title: "Done",
+      text: "Your ad has been posted successfully.",
+      icon: "success"
+    });
+    
+navigate("/")
 
     priceRef.current.value =""
     locationRef.current.value =""
@@ -75,7 +84,6 @@ const handleUpload = async (e) => {
   };
 
   let navToMain = function (){
-// navigate("/")
 console.log("navigate");
 
   }

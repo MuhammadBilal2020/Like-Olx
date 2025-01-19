@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword  } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
 import { auth } from '../../config/firebaseconfig';
+import Swal from 'sweetalert2';
 
 function Login() {
   let email = useRef('')
@@ -18,6 +19,15 @@ event.preventDefault()
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
+    Swal.fire({
+            title: "login successful",
+            text: "You are login",
+            icon: "success"
+          });Swal.fire({
+            title: "login successful",
+            text: "You are login",
+            icon: "success"
+          });
     navigate('/')
     console.log(user);
     

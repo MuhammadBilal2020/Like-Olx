@@ -4,6 +4,7 @@ import { serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/fireb
 
 import handleImageUpload from "../../../utils/cloudinaryUploader.js";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CarForm = ({ onSubmit, cateName, username, uid }) => {
   const titleRef = useRef("");
@@ -52,13 +53,20 @@ const CarForm = ({ onSubmit, cateName, username, uid }) => {
 
     onSubmit(carData);
 
+    Swal.fire({
+      title: "Done",
+      text: "Your ad has been posted successfully.",
+      icon: "success"
+    });
+    
+    navigate("/")
+
     priceRef.current.value =""
     locationRef.current.value =""
     descriptionRef.current.value =""
     companyRef.current.value =""
     titleRef.current.value =""
 
-    navigate("/")
   };
 
   
