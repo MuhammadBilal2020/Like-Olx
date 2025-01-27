@@ -1,81 +1,78 @@
-import React from 'react'
+import React from 'react';
 
 const Footer = () => {
   return (
-   <>
-   <div className='flex justify-between px-[9rem] pt-[1rem] pb-[3rem] mt-[3rem] bg-gray-200 shadow-lg'>
+    <>
+      <div className="sm:flex hidden  flex-wrap justify-between px-6 sm:px-12 lg:px-36 py-8 bg-gray-200 shadow-lg">
+        {/* Popular Categories */}
+        <div className="w-full sm:w-auto mb-6 sm:mb-0">
+          <h1 className="font-bold text-lg sm:text-xl">POPULAR CATEGORIES</h1>
+          <div className="mt-4 space-y-2">
+            <p>Cars</p>
+            <p>Flats for rent</p>
+            <p>Mobile phones</p>
+            <p>Jobs</p>
+          </div>
+        </div>
 
-   {/* Popular Categories  */}
-<div>
-    <h1 className='font-bold'>POPULAR CATEGORIES</h1>
+        {/* Trending Searches */}
+        <div className="w-full sm:w-auto mb-6 sm:mb-0">
+          <h1 className="font-bold text-lg sm:text-xl">TRENDING SEARCHES</h1>
+          <div className="mt-4 space-y-2">
+            <p>Cars</p>
+            <p>Flats for rent</p>
+            <p>Mobile phones</p>
+            <p>Jobs</p>
+          </div>
+        </div>
 
-    <div className='mt-2'>
-        <p className='mt-5'>Cars</p>
-        <p className='mt-2'>Flats for rent</p>
-        <p className='mt-2'>Mobile phones</p>
-        <p className='mt-2'>Jobs</p>
+        {/* About Us */}
+        <div className="w-full sm:w-auto mb-6 sm:mb-0">
+          <h1 className="font-bold text-lg sm:text-xl">ABOUT US</h1>
+          <div className="mt-4 space-y-2">
+            <p>Cars</p>
+            <p>Flats for rent</p>
+            <p>Mobile phones</p>
+            <p>Jobs</p>
+          </div>
+        </div>
 
-    </div>
-</div>
+        {/* OLX */}
+        <div className="w-full sm:w-auto mb-6 sm:mb-0">
+          <h1 className="font-bold text-lg sm:text-xl">OLX</h1>
+          <div className="mt-4 space-y-2">
+            <p>Cars</p>
+            <p>Flats for rent</p>
+            <p>Mobile phones</p>
+            <p>Jobs</p>
+          </div>
+        </div>
 
-{/* Trending Searches  */}
-<div>
-    <h1 className='font-bold'>TRENDING SEARCHES</h1>
-
-    <div className='mt-2'>
-        <p className='mt-5'>Cars</p>
-        <p className='mt-2'>Flats for rent</p>
-        <p className='mt-2'>Mobile phones</p>
-        <p className='mt-2'>Jobs</p>
-
-    </div>
-</div>
-
-
-{/* ABOUT US  */}
-<div>
-    <h1 className='font-bold'>ABOUT US</h1>
-
-    <div className='mt-2'>
-        <p className='mt-5'>Cars</p>
-        <p className='mt-2'>Flats for rent</p>
-        <p className='mt-2'>Mobile phones</p>
-        <p className='mt-2'>Jobs</p>
-
-    </div>
-</div>
-
-<div>
-    <h1 className='font-bold'>OLX</h1>
-
-    <div className='mt-2'>
-        <p className='mt-5'>Cars</p>
-        <p className='mt-2'>Flats for rent</p>
-        <p className='mt-2'>Mobile phones</p>
-        <p className='mt-2'>Jobs</p>
-
-    </div>
-</div> 
-
-<div>
-    <h1 className='font-bold'>FOLLOW US</h1>
-
-    <div className='mt-2'>
-        <p className='mt-5'>Cars</p>
-        <p className='mt-2'>Flats for rent</p>
-        <p className='mt-2'>Mobile phones</p>
-        <p className='mt-2'>Jobs</p>
-
-    </div>
-</div>
+        {/* Follow Us */}
+        <div className="w-full  sm:w-auto">
+          <h1 className="font-bold text-lg sm:text-xl">FOLLOW US</h1>
+          <div className="mt-4 space-y-2">
+            <p>Cars</p>
+            <p>Flats for rent</p>
+            <p>Mobile phones</p>
+            <p>Jobs</p>
+          </div>
+        </div>
 
 
+      </div>
 
 
+      
+      <div className="sm:hidden flex justify-center gap-x-2 p-2  sm:w-auto">
+        <p>App store</p>
+        <p>App store</p>
+        <p>App store</p>
 
-   </div>
-   </>
-  )
-}
+         
+        </div>
+    </>
+  );
+};
 
-export default Footer
+export default Footer;

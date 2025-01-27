@@ -61,12 +61,13 @@ const ProductDetail = () => {
     <>
       <Navbar />
       <div className="py-3">
-        <div className="prodetails flex justify-between w-[69rem] mx-auto mt-12">
-          <div className="image-and-desc w-[42rem]">
+        <div className="prodetails flex justify-between flex-wrap sm:w-[69rem]  mx-auto mt-12">
+          <div className="image-and-desc sm:w-[42rem] w-auto">
+
             {/* Product Image Carousel */}
             <div className="image rounded border">
               <div className="bg-gray-400 px-4 py-2">Featured</div>
-              <div className="relative w-full h-[30rem] overflow-hidden">
+              <div className="relative w-full sm:h-[30rem] h-[20rem] overflow-hidden">
                 {item.images && item.images.length > 0 ? (
                   <div className="flex transition-all duration-500" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
                     {item.images.map((image, index) => (
@@ -75,7 +76,7 @@ const ProductDetail = () => {
                           <img
                             src={image}
                             alt={`Product ${index + 1}`}
-                            className="object-cover w-[32rem] h-[29rem] block mx-auto" // Ensure the image fits properly without cutting off
+                            className="object-cover w-[32rem] sm:h-[29rem] h-[20rem] block mx-auto" // Ensure the image fits properly without cutting off
                           />
                         </div>
                       </div>
@@ -138,8 +139,10 @@ const ProductDetail = () => {
             </div>
           </div>
 
+
+
           {/* User Details */}
-          <div className="user-detail bg-white w-[26rem]">
+          <div className="user-detail bg-white sm:w-[26rem] mx-auto w-[22.3rem] sm:mt-0 mt-5">
             <div className="prof border-2 rounded px-6 py-5">
               <h1 className="text-xl font-semibold">Listed by Private User</h1>
               <div className="flex justify-between mt-3 items-center">
