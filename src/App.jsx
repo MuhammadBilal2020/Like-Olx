@@ -12,8 +12,8 @@ dayjs.extend(relativeTime);
 function App() {
   const [data, setData] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(''); // Search query state
-  const [filteredData, setFilteredData] = useState([]); // Filtered data state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
 
   let navigate = useNavigate();
 
@@ -24,7 +24,7 @@ function App() {
         const posts = postsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
           .filter((post) => post.status !== "Inactive");
         setData(posts);
-        setFilteredData(posts); // Initialize filteredData with all posts
+        setFilteredData(posts);
       } catch (error) {
         console.error('Error fetching documents:', error);
       }
@@ -41,7 +41,6 @@ function App() {
     fetchCartItems();
   }, []);
 
-  // Inside App component
   const handleSearchChange = (query) => {
     setSearchQuery(query);
     if (query) {
@@ -55,7 +54,6 @@ function App() {
       setFilteredData(data);
     }
   };
-
 
   const goToDetail = (item) => {
     navigate(`/productDetail/${item.id}`, { state: { item } });
@@ -81,11 +79,11 @@ function App() {
             <h1 className="text-2xl font-bold mb-4 text-blue-600 bg-gray-100 px-4 py-2 rounded-md">
               {category} Products
             </h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredItems.map((item, index) => (
                 <div
                   key={index}
-                  className="border-[2px] sm:w-[300px] md:w-[350px] border-gray-300 shadow-lg rounded-lg hover:scale-105"
+                  className="border-[2px] border-gray-300 shadow-lg rounded-lg hover:scale-105 transition-all"
                 >
                   <div className="h-40 overflow-hidden">
                     <img
@@ -104,8 +102,8 @@ function App() {
                       <div
                         onClick={() => handleHeartClick(index, item)}
                         className={`flex items-center justify-center p-2 rounded-full cursor-pointer transition-all ${cartItems.some((cartItem) => cartItem.id === item.id)
-                            ? 'text-red-600'
-                            : 'text-gray-700'
+                          ? 'text-red-600'
+                          : 'text-gray-700'
                           }`}
                         style={{ width: '2.5rem', height: '2.5rem' }}
                       >
@@ -152,7 +150,6 @@ function App() {
       <Navbar handleSearchChange={handleSearchChange} />
 
       <div className="mt-8 px-4 max-w-6xl mx-auto">
-
         {renderCategory('Mobile')}
         {renderCategory('Bike')}
         {renderCategory('Car')}
