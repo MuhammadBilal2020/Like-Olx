@@ -22,7 +22,7 @@ function App() {
       try {
         const postsSnapshot = await getDocs(collection(db, 'Posts'));
         const posts = postsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-        .filter((post) => post.status !== "Inactive");
+          .filter((post) => post.status !== "Inactive");
         setData(posts);
         setFilteredData(posts); // Initialize filteredData with all posts
       } catch (error) {
@@ -41,20 +41,20 @@ function App() {
     fetchCartItems();
   }, []);
 
-// Inside App component
-const handleSearchChange = (query) => {
-  setSearchQuery(query);
-  if (query) {
-    const filtered = data.filter((item) =>
-      item.title.toLowerCase().includes(query) ||
-      item.description.toLowerCase().includes(query) ||
-      item.cateName.toLowerCase().includes(query)
-    );
-    setFilteredData(filtered);
-  } else {
-    setFilteredData(data);
-  }
-};
+  // Inside App component
+  const handleSearchChange = (query) => {
+    setSearchQuery(query);
+    if (query) {
+      const filtered = data.filter((item) =>
+        item.title.toLowerCase().includes(query) ||
+        item.description.toLowerCase().includes(query) ||
+        item.cateName.toLowerCase().includes(query)
+      );
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(data);
+    }
+  };
 
 
   const goToDetail = (item) => {
@@ -66,7 +66,7 @@ const handleSearchChange = (query) => {
     const updatedCart = isItemInCart
       ? cartItems.filter((cartItem) => cartItem.id !== item.id)
       : [...cartItems, item];
-    
+
     setCartItems(updatedCart);
     localStorage.setItem('Cart', JSON.stringify(updatedCart));
   };
@@ -103,11 +103,10 @@ const handleSearchChange = (query) => {
                       <h2 className="font-bold text-lg text-gray-800">Rs {item.price}</h2>
                       <div
                         onClick={() => handleHeartClick(index, item)}
-                        className={`flex items-center justify-center p-2 rounded-full cursor-pointer transition-all ${
-                          cartItems.some((cartItem) => cartItem.id === item.id)
+                        className={`flex items-center justify-center p-2 rounded-full cursor-pointer transition-all ${cartItems.some((cartItem) => cartItem.id === item.id)
                             ? 'text-red-600'
                             : 'text-gray-700'
-                        }`}
+                          }`}
                         style={{ width: '2.5rem', height: '2.5rem' }}
                       >
                         <CiHeart className="text-2xl" />
@@ -150,10 +149,10 @@ const handleSearchChange = (query) => {
 
   return (
     <>
-     <Navbar handleSearchChange={handleSearchChange} />
+      <Navbar handleSearchChange={handleSearchChange} />
 
       <div className="mt-8 px-4 max-w-6xl mx-auto">
-       
+
         {renderCategory('Mobile')}
         {renderCategory('Bike')}
         {renderCategory('Car')}
