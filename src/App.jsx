@@ -74,7 +74,7 @@ function App() {
     const filteredItems = filteredData.filter((item) => item.cateName === category);
 
     return (
-      <div className={`${category} mt-[2rem]`}>
+      <div className={`${category} sm:w-[65rem]  mt-[2rem]`}>
         {filteredItems.length > 0 && (
           <>
             <h1 className="text-2xl font-bold mb-4    py-2 rounded-md">
@@ -84,16 +84,16 @@ function App() {
               {filteredItems.map((item, index) => (
                 <div
                   key={index}
-                  className="border-[2px] border-gray-300 shadow-lg rounded-lg hover:scale-105 transition-all"
+                  className="border-[2px] border-gray-300 shadow-lg rounded-lg hover:scale-90 transition-all"
                 >
-                  <div className="h-40 overflow-hidden">
+                  <div className="h-[13rem] overflow-hidden">
                     <img
                       src={
                         Array.isArray(item.images) && item.images.length > 0
                           ? item.images[0]
                           : 'https://via.placeholder.com/150'
                       }
-                      className="h-full w-full object-cover"
+                      className="h-full p-3 w-full object-cover"
                       alt={item.title}
                     />
                   </div>
