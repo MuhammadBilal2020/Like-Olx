@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
+
 dayjs.extend(relativeTime);
 
 function App() {
@@ -112,18 +113,11 @@ function App() {
                       </div>
                     </div>
                     <h3 className="font-semibold text-gray-700 h-[1.8rem]">{item.title}</h3>
-                    {/* <p className="text-sm text-gray-600 mb-2 h-[2rem]" title={item.description}>
-                      {item.description.slice(0, 50)}...
-                    </p> */}
+                  
                     <p className="text-sm text-gray-500 h-[1.5rem]">
                       <span className="font-semibold">Location:</span> {item.location}
                     </p>
-                    {/* <p className="text-sm text-gray-500 h-[1.5rem]">
-                      <span className="font-semibold">Category:</span> {item.cateName}
-                    </p> */}
-                    {/* <p className="text-sm text-gray-500 h-[1.5rem]">
-                      <span className="font-semibold">Seller:</span> {item.username}
-                    </p> */}
+                    
                     <p className="text-sm text-gray-500 h-[1.5rem]">
                       <span className="font-semibold">Posted:</span>{' '}
                       {item.postedAt instanceof Timestamp

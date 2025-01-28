@@ -8,6 +8,7 @@ import { GrFavorite } from "react-icons/gr";
 import { MdOutlinePerson } from "react-icons/md";
 import { FaBuysellads } from "react-icons/fa6";
 import { IoMdSettings } from "react-icons/io";
+import { IoCloseOutline } from "react-icons/io5";
 
 
 
@@ -232,7 +233,7 @@ function Navbar({ searchQuery, handleSearchChange }) {
               onClick={closeSidebar}
               className="text-[1.5rem] font-semibold"
             >
-              ✖
+              <IoCloseOutline  className="text-[black] text-[2rem]"/>
             </button>
           </div>
           
