@@ -74,7 +74,7 @@ function App() {
     const filteredItems = filteredData.filter((item) => item.cateName === category);
 
     return (
-      <div className={`${category} sm:w-[65rem]  mt-[2rem]`}>
+      <div className={`${category} sm:w-[65rem] w-[20rem] mx-auto   mt-[2rem]`}>
         {filteredItems.length > 0 && (
           <>
             <h1 className="text-2xl font-bold mb-4    py-2 rounded-md">
