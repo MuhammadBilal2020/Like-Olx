@@ -76,8 +76,8 @@ function App() {
       <div className={`${category} mt-[2rem]`}>
         {filteredItems.length > 0 && (
           <>
-            <h1 className="text-2xl font-bold mb-4 text-blue-600 bg-gray-100 px-4 py-2 rounded-md">
-              {category} Products
+            <h1 className="text-2xl font-bold mb-4    py-2 rounded-md">
+              {category} 
             </h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredItems.map((item, index) => (
@@ -101,28 +101,29 @@ function App() {
                       <h2 className="font-bold text-lg text-gray-800">Rs {item.price}</h2>
                       <div
                         onClick={() => handleHeartClick(index, item)}
-                        className={`flex items-center justify-center p-2 rounded-full cursor-pointer transition-all ${cartItems.some((cartItem) => cartItem.id === item.id)
-                          ? 'text-red-600'
-                          : 'text-gray-700'
-                          }`}
+                        className={`flex items-center justify-center p-2 rounded-full cursor-pointer transition-all ${
+                          cartItems.some((cartItem) => cartItem.id === item.id)
+                            ? 'text-red-600'
+                            : 'text-gray-700'
+                        }`}
                         style={{ width: '2.5rem', height: '2.5rem' }}
                       >
                         <CiHeart className="text-2xl" />
                       </div>
                     </div>
                     <h3 className="font-semibold text-gray-700 h-[1.8rem]">{item.title}</h3>
-                    <p className="text-sm text-gray-600 mb-2 h-[2rem]" title={item.description}>
+                    {/* <p className="text-sm text-gray-600 mb-2 h-[2rem]" title={item.description}>
                       {item.description.slice(0, 50)}...
-                    </p>
+                    </p> */}
                     <p className="text-sm text-gray-500 h-[1.5rem]">
                       <span className="font-semibold">Location:</span> {item.location}
                     </p>
-                    <p className="text-sm text-gray-500 h-[1.5rem]">
+                    {/* <p className="text-sm text-gray-500 h-[1.5rem]">
                       <span className="font-semibold">Category:</span> {item.cateName}
-                    </p>
-                    <p className="text-sm text-gray-500 h-[1.5rem]">
+                    </p> */}
+                    {/* <p className="text-sm text-gray-500 h-[1.5rem]">
                       <span className="font-semibold">Seller:</span> {item.username}
-                    </p>
+                    </p> */}
                     <p className="text-sm text-gray-500 h-[1.5rem]">
                       <span className="font-semibold">Posted:</span>{' '}
                       {item.postedAt instanceof Timestamp
