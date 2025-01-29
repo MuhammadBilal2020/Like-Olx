@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { auth } from '../../config/firebaseconfig';
-import { collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
+import { collection, addDoc, serverTimestamp, getDocs } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
 import { db } from "../../config/firebaseconfig";
 import Swal from 'sweetalert2';
 
@@ -18,29 +18,31 @@ function Register() {
   let email = useRef('')
   let password = useRef('')
   let confirmPass = useRef('')
+  let [user, setUser] = useState()
+  const [uploadedImages, setUploadedImages] = useState([]);
+  const [uploading, setUploading] = useState(false);
+
+
   
-    const [uploadedImages, setUploadedImages] = useState([]);
-    const [uploading, setUploading] = useState(false);
+       
+   
 
 
+  const handleUpload = async (e) => {
+    const files = e.target.files;
+    if (!files.length) return;
 
 
+    setUploading(true);
 
-    const handleUpload = async (e) => {
-      const files = e.target.files;
-      if (!files.length) return;
-    
-    
-      setUploading(true);
-    
-      const uploadPreset = "olx_clone_profile_image"; // Replace with your preset
-      const cloudName = "dpdxrs2pg"; // Replace with your cloud name
-    
-      const url = await handleImageUpload(files, uploadPreset, cloudName);
-      setUploadedImages(url);
-    
-      setUploading(false);
-    };
+    const uploadPreset = "olx_clone_profile_image"; // Replace with your preset
+    const cloudName = "dpdxrs2pg"; // Replace with your cloud name
+
+    const url = await handleImageUpload(files, uploadPreset, cloudName);
+    setUploadedImages(url);
+
+    setUploading(false);
+  };
   // register user  and store data in firestore
   // Ensure this is imported
 
@@ -54,6 +56,16 @@ function Register() {
 
     try {
       // Register user
+
+      const postsSnapshot = await getDocs(collection(db, 'users'));
+      const users = postsSnapshot.docs.map(doc => doc.data())
+
+      let alreadyAUser = users.find((user => user.email === email.current.value))
+      if (alreadyAUser) {
+        console.log("email is already in use ");
+        return
+      }
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email.current.value,
@@ -67,7 +79,7 @@ function Register() {
         text: "You are register",
         icon: "success"
       });
-      
+
 
 
 
@@ -78,13 +90,13 @@ function Register() {
         password: password.current.value,
         uid: user.uid, // Use user.uid directly here
         createdAt: serverTimestamp(), // Add the timestamp here
-        profileImage : uploadedImages
+        profileImage: uploadedImages
 
 
       });
-      
 
-      
+
+
       console.log(docRef);
 
 
@@ -94,12 +106,14 @@ function Register() {
       email.current.value = ""
       confirmPass.current.value = ""
 
+
+
     } catch (error) {
       console.error("Error: ", error.code, error.message);
     }
   };
 
-  
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -178,25 +192,25 @@ function Register() {
             />
 
             <div className="files justify-center flex gap-4 mt-4">
-                      <input
-                        type="file"
-                        multiple
-                        accept="image/*"
-                        onChange={handleUpload}
-                        className="hidden"
-                        id="fileUpload"
-                      />
-                      <label
-                        htmlFor="fileUpload"
-                        className="cursor-pointer flex gap-x-2 justify-center w-full p-3 border border-dashed border-gray-300 rounded-md text-center"
-                      >
-                        <div className="w-[2rem]">
-                          
-                        <FaUpload className="block   text-blue-500 text-xl" />
-                        </div>
-                        {uploading ? "Uploading..." : "Select Profile Image"}
-                      </label>
-                    </div>
+              <input
+                type="file"
+                multiple
+                accept="image/*"
+                onChange={handleUpload}
+                className="hidden"
+                id="fileUpload"
+              />
+              <label
+                htmlFor="fileUpload"
+                className="cursor-pointer flex gap-x-2 justify-center w-full p-3 border border-dashed border-gray-300 rounded-md text-center"
+              >
+                <div className="w-[2rem]">
+
+                  <FaUpload className="block   text-blue-500 text-xl" />
+                </div>
+                {uploading ? "Uploading..." : "Select Profile Image"}
+              </label>
+            </div>
           </div>
 
           {/* Submit Button */}
