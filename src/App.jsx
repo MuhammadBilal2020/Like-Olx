@@ -65,7 +65,7 @@ function App() {
     const updatedCart = isItemInCart
       ? cartItems.filter((cartItem) => cartItem.id !== item.id)
       : [...cartItems, item];
-
+    
     setCartItems(updatedCart);
     localStorage.setItem('Cart', JSON.stringify(updatedCart));
   };

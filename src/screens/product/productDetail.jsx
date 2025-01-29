@@ -1,32 +1,28 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Timestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { Timestamp, collection, query, where, getDocs, } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js';
+
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/footer";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
+import { CiHeart } from 'react-icons/ci';
+import { useEffect } from "react";
+import { auth, db } from "../../config/firebaseconfig";
+
 
 const ProductDetail = () => {
   const { id } = useParams();
   const location = useLocation();
   const { item } = location.state || {}; // Safely access `item`
   const navigate = useNavigate();
-
-  console.log(item);
-
-
+  const [cartItems, setCartItems] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const goToProfile = (uid) => {
-    navigate(`/postprofile/${uid}`);
-  };
-
-  const goToChat = (uid) => {
-    navigate(`/chat/${uid}`)
-
-
-  };
+  
+  
+  
 
   if (!item) {
     return (
@@ -42,19 +38,58 @@ const ProductDetail = () => {
     );
   }
 
+  // fetch data from cart 
+useEffect(() => {
+
+
+  const fetchCartItems = () => {
+    const storedCart = localStorage.getItem('Cart');
+    if (storedCart) {
+      setCartItems(JSON.parse(storedCart));
+    }
+    
+    
+  };
+
+
+  fetchCartItems()
+  
+} , [])
+
+  // go to profile 
+  const goToProfile = (uid) => {
+    navigate(`/postprofile/${uid}`);
+  };
+
+  // add yo cart 
+  let addToCart = function (item) {
+    // console.log(item);
+     isitemInCart = cartItems.some((cartItem) => cartItem.id === item.id)
+    console.log(cartItems);
+    
+    let updatedCart = isitemInCart ? cartItems.filter((cartItem) => cartItem.id !== item.id ) : [...cartItems ,item]
+    setCartItems(updatedCart)
+
+
+  localStorage.setItem("Cart" , JSON.stringify(updatedCart))
+    
+
+
+  }
+
+  // carousel next 
   const goToNext = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === item.images.length - 1 ? 0 : prevIndex + 1
     );
   };
 
+  // carousel back 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? item.images.length - 1 : prevIndex - 1
     );
   };
-
-
 
 
   return (
@@ -73,7 +108,7 @@ const ProductDetail = () => {
                     style={{ transform: `translateX(-${currentIndex * 100}%)` }}
                   >
                     {/* Featured Label */}
-                    <h1 className="absolute sm:bg-[transparent] sm:text-black bg-[#ffce32] w-[5rem] py-1 top-[.2rem] left-[.2rem] flex justify-center items-center text-white rounded-md shadow-md z-10">
+                    <h1 className="absolute sm:bg-[transparent] sm:text-black bg-[#ffce32] w-[5rem] py-1 top-[.2rem] left-[.75rem] flex justify-center items-center text-white rounded-md shadow-md z-10">
                       Featured
                     </h1>
                     {item.images.map((image, index) => (
@@ -126,9 +161,13 @@ const ProductDetail = () => {
             <div className="price-name-loc border-2 mt-8 px-4 bg-white py-4 rounded">
               <div className="flex justify-between items-center">
                 <h1 className="text-2xl font-semibold">Rs {item.price}</h1>
-                <div>
-                  <span className="text-lg font-semibold">S</span>
-                  <span className="text-lg font-semibold ml-2">Heart</span>
+                <div  className={` cursor-pointer transition-all ${
+                          cartItems.some((cartItem) => cartItem.id === item.id)
+                            ? 'text-red-600'
+                            : 'text-gray-700'
+                        }`} onClick={() => addToCart(item)}>
+                
+                  <CiHeart className="text-2xl" />
                 </div>
               </div>
               <h2 className="text-lg font-semibold mt-3">Title: {item.title}</h2>
@@ -158,9 +197,9 @@ const ProductDetail = () => {
               <div className="flex justify-between mt-3 items-center">
                 <div>
                   <img
-                    src={item.userImage || "placeholder.jpg"}
+                    src={item.profilePic|| "placeholder.jpg"}
                     alt="User"
-                    className="w-12 h-12 rounded-full"
+                    className="w-20 h-20 object-cover rounded-full"
                   />
                 </div>
                 <div>

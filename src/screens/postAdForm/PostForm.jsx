@@ -12,6 +12,7 @@ const PostForm = () => {
   const { cateName } = useParams();
   const [username, setUsername] = useState("");
   const [uid, setUid] = useState("");
+  let [profilePic ,setProfilePic] = useState()
 
   const fetchData = async (user) => {
     try {
@@ -20,7 +21,10 @@ const PostForm = () => {
 
       if (!querySnapshot.empty) {
         querySnapshot.forEach((doc) => {
+          console.log(doc.data());
+          
           setUsername(doc.data().username);
+          setProfilePic(doc.data().profileImage);
         });
       } else {
         console.error("No matching user document found.");
@@ -49,6 +53,7 @@ const PostForm = () => {
       username,
       uid,
       cateName,
+      profilePic,
       timestamp: new Date().toISOString(),
     };
 
