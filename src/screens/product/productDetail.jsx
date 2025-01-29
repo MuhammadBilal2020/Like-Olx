@@ -14,7 +14,7 @@ const ProductDetail = () => {
   const navigate = useNavigate();
 
   console.log(item);
-  
+
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -24,8 +24,8 @@ const ProductDetail = () => {
 
   const goToChat = (uid) => {
     navigate(`/chat/${uid}`)
-      
-    
+
+
   };
 
   if (!item) {
@@ -65,25 +65,33 @@ const ProductDetail = () => {
           <div className="image-and-desc sm:w-[42rem] w-auto">
 
             {/* Product Image Carousel */}
-            <div className="image bg-[#dbfdef] rounded border">
-              <div className="relative w-full sm:h-[30rem] h-[20rem] overflow-hidden">
+            <div className="image bg-[#f6f6f6] rounded border mx-auto flex justify-center items-center relative">
+              <div className="relative w-full sm:h-[30rem] h-[20rem] overflow-hidden flex justify-center items-center">
                 {item.images && item.images.length > 0 ? (
-                  <div className="flex transition-all duration-500" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-                    <h1 className="realtive bg-[red] w-[5rem] h-[5rem] top-5 left-4">Featured</h1>
+                  <div
+                    className="flex transition-all duration-500"
+                    style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                  >
+                    {/* Featured Label */}
+                    <h1 className="absolute sm:bg-[transparent] sm:text-black bg-[#ffce32] w-[5rem] py-1 top-[.2rem] left-[.2rem] flex justify-center items-center text-white rounded-md shadow-md z-10">
+                      Featured
+                    </h1>
                     {item.images.map((image, index) => (
                       <div key={index} className="flex-shrink-0 px-3 w-full h-full">
                         <div className="imgs">
                           <img
                             src={image}
                             alt={`Product ${index + 1}`}
-                            className="object-cover w-[32rem] sm:h-[29rem] h-[20rem] block mx-auto" // Ensure the image fits properly without cutting off
+                            className="object-cover w-[30rem] sm:h-[29rem] h-[20rem] block mx-auto"
                           />
                         </div>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="h-full flex items-center justify-center bg-gray-200">No Image Available</div>
+                  <div className="h-full flex items-center justify-center bg-gray-200">
+                    No Image Available
+                  </div>
                 )}
                 {/* Prev/Next Buttons */}
                 <button
@@ -105,12 +113,14 @@ const ProductDetail = () => {
                     <div
                       key={index}
                       onClick={() => setCurrentIndex(index)}
-                      className={`w-3 h-3 rounded-full cursor-pointer ${currentIndex === index ? "bg-blue-500" : "bg-gray-400"}`}
+                      className={`w-3 h-3 rounded-full cursor-pointer ${currentIndex === index ? "bg-blue-500" : "bg-gray-400"
+                        }`}
                     />
                   ))}
                 </div>
               </div>
             </div>
+
 
             {/* Product Details */}
             <div className="price-name-loc border-2 mt-8 px-4 bg-white py-4 rounded">
@@ -170,7 +180,7 @@ const ProductDetail = () => {
               <button
                 className="mt-3 w-full bg-[#5fdae8] text-white py-2 rounded"
                 onClick={() => goToChat(item.uid)}
-                
+
               >
                 Chat
               </button>
